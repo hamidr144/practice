@@ -1,21 +1,26 @@
-%%This is a very basic article template.
-%%There is just one section and two subsections.
-\documentclass{article}
+\documentclass[12pt]{article}
+% Эта строка — комментарий, она не будет показана в выходном файле
+\usepackage{ucs}
+\usepackage[cp1251]{inputenc} % Включаем поддержку UTF8
+\usepackage[russian]{babel}  % Включаем пакет для поддержки русского языка
+\usepackage{cmap}
 
+
+\title{\LaTeX}
+\date{}
+\author{}
+ 
 \begin{document}
 
+  Уже достаточно давно практически все тексты, включая презентации, создаваемые в LaTeX я собираю в 
+  формат PDF. Он много меньше размером, чем Postscript, позволяет осуществлять поиск по тексту, 
+  позволяет включать изображения в формате PNG или JPG, а также делать гиперссылки, встроенное 
 
-\section{Title}
 
-\subsection{Subtitle}
+Однако для создания PDF с русскими буквами средствами LaTeX требуются некоторые ухищрения.
 
-Plain text.
-\newline
-aaaaaaaaaaaa
-\subsection{Another subtitle}
-
-More plain text. 
-\newline
-aaaaaasdasdasdasdasd
-
+Во-первых, в этом случае надо использовать пакет cmap, иначе поиск по русским символам в 
+полученном PDF будет невозможен.
+  
+  
 \end{document}
