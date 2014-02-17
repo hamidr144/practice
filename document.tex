@@ -1,17 +1,24 @@
 \documentclass[14pt,a4paper]{article}
 %\renewcommand{\baselinestretch}{1.5}
 \linespread{1.3}
-
+\usepackage[T2A]{fontenc} % Поддержка русских букв
 \usepackage[utf8]{inputenc} 
 \usepackage[english,russian]{babel}  
 
 
  
 \begin{document}
-\tableofcontents
+\thispagestyle{empty}
+
+\begin{center}
+\textbf{САНКТ-ПЕТЕРБУРГСКИЙ НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ ИНФОРМАЦИОННЫХ ТЕХНОЛОГИЙ, 
+МЕХАНИКИ И ОПТИКИ}
+\end{center}
+
 
 \newpage
-
+\tableofcontents
+\newpage
 \section{Система компьютерной верстки \TeX(\LaTeX)}
 \subsection{\TeX}
 \subsubsection{История \TeX}
@@ -32,7 +39,6 @@
 
 \TeX{} можно использовать для создания разных видов докуметов: книги, статьи,
 отчеты, письма и др.
-
 
 \subsection{\LaTeX}
 \LaTeX{} ~--- макропакет компьютерной верстки \TeX{}. Он не добаляет возможности
@@ -57,7 +63,15 @@
 \item{}\TeX{} плохо приспособлен для верстки страниц со сложным взаимодействие текста
 и графиков.
 \end{itemize}
-\newpage
-\section{Литература}
+
+\subsection{Описание выбранного ПО}
+Для написания отчета по практике был выбра ряд программного обеспечения:
+\begin{enumerate}
+\item Сборка \TeX'а MacTeX(http://tug.org/mactex/), включающий pdfLaTeX, который
+выдает документ с расширение pdf.
+\item IDE Eclipse(https://www.eclipse.org/) с расширением
+TeXlipse(http://texlipse.sourceforge.net/), позволяющие удобно редактировать
+документ.
+\end{enumerate}
 \end{document}
  
