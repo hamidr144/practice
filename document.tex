@@ -282,8 +282,7 @@ using namespace ns3;
 
 NS_LOG_COMPONENT_DEFINE ("FirstScriptExample");
 
-int
-main (int argc, char *argv[])
+int main (int argc, char *argv[])
 {
   Time::SetResolution (Time::NS);
   LogComponentEnable ("UdpEchoClientApplication", LOG_LEVEL_INFO);
@@ -328,6 +327,10 @@ main (int argc, char *argv[])
 }
 
 \end{verbatim} 
+
+Как видно из кода выше, при помощи \textit{include} подключаються заголовочные
+файлы, в которых описаны нужные модули. На следующей строке \textit{using
+namespace ns3;} обозначает то, что мы используем пространство имен ns3(ns3::).
 \newpage
 \addcontentsline{toc}{section}{Литература}
 \bibliography{biblio}
