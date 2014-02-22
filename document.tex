@@ -368,6 +368,29 @@ Ipv4AddressHelper, которому сообщаем что он должен н
 \textit{Ipv4InterfaceContainer interfaces = address.Assign (devices);} 
 присваивает адресса устройствам.
 
+\textit{UdpEchoServerHelper echoServer (9);} Создает серверное приложение
+которое ждет UDP-пакет и потом отправляет его обратно отправителю(Используеться прот 9).
+\textit{ApplicationContainer serverApps = echoServer.Install (nodes.Get (1)); serverApps.Start (Seconds (1.0));
+  serverApps.Stop (Seconds (10.0));} Устанавливаем приложение на узел 2 и задаем
+  время начала и конца работы.
+  
+\textit{UdpEchoClientHelper echoClient (interfaces.GetAddress (1), 9);} Создает
+приложение которое посылает UDP-пакет и ждет пока придет его эхо.
+\textit{echoClient.SetAttribute ("MaxPackets", UintegerValue (1));
+echoClient.SetAttribute ("Interval", TimeValue (Seconds (1.0)));
+echoClient.SetAttribute ("PacketSize", UintegerValue (1024));} настройка
+параметров этого приложение: отправляет 1 пакет, интервал между пакетами 1 с и
+размер пакета 1024 бита.
+
+\textit{ApplicationContainer clientApps = echoClient.Install (nodes.Get (0));
+  clientApps.Start (Seconds (2.0));
+  clientApps.Stop (Seconds (10.0));} Устанавливаем приложение на узел 1, с
+  началом работы через 2 секунды после начала симуляции, и конец после 10 секунд
+  от начала симуляции.
+  
+\textit{Simulator::Run ();} Запускает симуляцию.
+\textit{Simulator::Destroy ();} Освобождение памяти от симултируемой модели.
+  
 \newpage
 \addcontentsline{toc}{section}{Литература}
 \bibliography{biblio}
