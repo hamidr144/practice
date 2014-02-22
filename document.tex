@@ -328,7 +328,7 @@ int main (int argc, char *argv[])
 
 \end{verbatim} 
 
-Как видно из кода выше, при помощи \textit{include} подключаються заголовочные
+При помощи \textit{include} подключаються заголовочные
 файлы, в которых описаны нужные модули. На следующей строке \textit{using
 namespace ns3;} обозначает то, что мы используем пространство имен ns3(ns3::).
 
@@ -354,27 +354,27 @@ pointToPoint.SetChannelAttribute ("Delay", StringValue ("2ms"));}
 канала(PointToPointChannel) впоследствии.
 
 \textit{NetDeviceContainer devices; 
-devices = pointToPoint.Install (nodes);} Это позволяет настроить созданные нами
+devices = pointToPoint.Install (nodes);} позволяет настроить созданные нами
 узлы в начале программы и канал между ними(Параметры: скорость передачи данных
 5 Мбит/с с задержкой в 2 мс).
 
 \textit{InternetStackHelper stack;
- stack.Install (nodes);} Дает TCP/UPD/IP функционал существующим узлам.
+ stack.Install (nodes);} дает TCP/UPD/IP функционал существующим узлам.
 
 \textit{Ipv4AddressHelper address; 
-address.SetBase ("10.1.1.0", "255.255.255.0");} Создает объект
+address.SetBase ("10.1.1.0", "255.255.255.0");} создает объект
 Ipv4AddressHelper, которому сообщаем что он должен начать выделять адрессз сети
 10.1.1.0 используя маску 255.255.255.0.
 \textit{Ipv4InterfaceContainer interfaces = address.Assign (devices);} 
 присваивает адресса устройствам.
 
-\textit{UdpEchoServerHelper echoServer (9);} Создает серверное приложение
+\textit{UdpEchoServerHelper echoServer (9);} создает серверное приложение
 которое ждет UDP-пакет и потом отправляет его обратно отправителю(Используеться прот 9).
 \textit{ApplicationContainer serverApps = echoServer.Install (nodes.Get (1)); serverApps.Start (Seconds (1.0));
-  serverApps.Stop (Seconds (10.0));} Устанавливаем приложение на узел 2 и задаем
+  serverApps.Stop (Seconds (10.0));} устанавливает приложение на узел 2 и задает
   время начала и конца работы.
   
-\textit{UdpEchoClientHelper echoClient (interfaces.GetAddress (1), 9);} Создает
+\textit{UdpEchoClientHelper echoClient (interfaces.GetAddress (1), 9);} создает
 приложение которое посылает UDP-пакет и ждет пока придет его эхо.
 \textit{echoClient.SetAttribute ("MaxPackets", UintegerValue (1));
 echoClient.SetAttribute ("Interval", TimeValue (Seconds (1.0)));
@@ -384,12 +384,12 @@ echoClient.SetAttribute ("PacketSize", UintegerValue (1024));} настройк�
 
 \textit{ApplicationContainer clientApps = echoClient.Install (nodes.Get (0));
   clientApps.Start (Seconds (2.0));
-  clientApps.Stop (Seconds (10.0));} Устанавливаем приложение на узел 1, с
+  clientApps.Stop (Seconds (10.0));} устанавливат приложение на узел 1, с
   началом работы через 2 секунды после начала симуляции, и конец после 10 секунд
   от начала симуляции.
   
-\textit{Simulator::Run ();} Запускает симуляцию.
-\textit{Simulator::Destroy ();} Освобождение памяти от симултируемой модели.
+\textit{Simulator::Run ();} запускает симуляцию.
+\textit{Simulator::Destroy ();} освобождает память от симултируемой модели.
   
 \newpage
 \addcontentsline{toc}{section}{Литература}
