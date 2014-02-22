@@ -331,6 +331,43 @@ int main (int argc, char *argv[])
 Как видно из кода выше, при помощи \textit{include} подключаються заголовочные
 файлы, в которых описаны нужные модули. На следующей строке \textit{using
 namespace ns3;} обозначает то, что мы используем пространство имен ns3(ns3::).
+
+Макрос \textit{NS\_LOG\_COMPONENT\_DEFINE ("FirstScriptExample");}
+используеться для последущей документации при помощи системы документации Doxygen.
+
+\textit{int main (int argc, char *argv[])} являеться главной функции и первой
+входной точкой программы, как для любой С/С++ программы. Это связано с тем, что
+для моделирования используеться язык программирования C++(Код ns-3 просто
+программа на C++).
+
+\textit{NodeContainer nodes;} объявляет объект типа NodeContainer, а
+\textit{nodes.Create (2);} создает 2 узла и добавляет сылки на них в
+этот NodeContainer.
+
+
+\textit{PointToPointHelper pointToPoint; 
+pointToPoint.SetDeviceAttribute ("DataRate", StringValue ("5Mbps")); 
+pointToPoint.SetChannelAttribute ("Delay", StringValue ("2ms"));} 
+Упрощает соединение и настройку PointToPointNetDevice и PointToPointChannel
+объектов. Так же устанавливает для устройства(объекта PointToPointNetDevice)
+атрибут "DataRate" значение 5Mbps и задержку в 2мс для каждого созданного
+канала(PointToPointChannel) впоследствии.
+
+\textit{NetDeviceContainer devices; 
+devices = pointToPoint.Install (nodes);} Это позволяет настроить созданные нами
+узлы в начале программы и канал между ними(Параметры: скорость передачи данных
+5 Мбит/с с задержкой в 2 мс).
+
+\textit{InternetStackHelper stack;
+ stack.Install (nodes);} Дает TCP/UPD/IP функционал существующим узлам.
+
+\textit{Ipv4AddressHelper address; 
+address.SetBase ("10.1.1.0", "255.255.255.0");} Создает объект
+Ipv4AddressHelper, которому сообщаем что он должен начать выделять адрессз сети
+10.1.1.0 используя маску 255.255.255.0.
+\textit{Ipv4InterfaceContainer interfaces = address.Assign (devices);} 
+присваивает адресса устройствам.
+
 \newpage
 \addcontentsline{toc}{section}{Литература}
 \bibliography{biblio}
