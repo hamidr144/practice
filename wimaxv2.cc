@@ -24,7 +24,7 @@ int main (int argc, char *argv[])
 {
 
 
-  double duration = 5.5;
+  double duration = 10;
   WimaxHelper::SchedulerType scheduler = WimaxHelper::SCHED_TYPE_SIMPLE;
 
 
@@ -58,16 +58,10 @@ int main (int argc, char *argv[])
 
 
 
-  Ptr<ConstantPositionMobilityModel> BSPosition;
   Ptr<RandomWaypointMobilityModel> SSPosition;
   Ptr<RandomRectanglePositionAllocator> SSPosAllocator;
 
-  //задаем позицию базы
-  BSPosition = CreateObject<ConstantPositionMobilityModel> ();
 
-  BSPosition->SetPosition (Vector (0, 0, 0));
-  bsNodes.Get (0)->AggregateObject (BSPosition);
-  bsDevs.Add (bsDevs);
 
   //задаем область передвижения мобильной станции
   SSPosition = CreateObject<RandomWaypointMobilityModel> ();
@@ -81,7 +75,7 @@ int main (int argc, char *argv[])
   yVar->SetAttribute ("Max", DoubleValue (0));
   SSPosAllocator->SetY (yVar);
   SSPosition->SetAttribute ("PositionAllocator", PointerValue (SSPosAllocator));
-  SSPosition->SetAttribute ("Speed", StringValue ("ns3::ConstantRandomVariable[Constant=125]"));
+  SSPosition->SetAttribute ("Speed", StringValue ("ns3::ConstantRandomVariable[Constant=30]"));
   SSPosition->SetAttribute ("Pause", StringValue ("ns3::ConstantRandomVariable[Constant=0.01]"));
 
 
@@ -105,7 +99,7 @@ int main (int argc, char *argv[])
   stack.Install (ssNodes);
 
   MobilityHelper mobility;
-  mobility.Install (bsNodes); 
+  mobility.Install (ssNodes); 
   mobility.Install (bsNodes);
 
 
@@ -178,6 +172,13 @@ int main (int argc, char *argv[])
                                                           DlClassifierUgs);
 
   ss->AddServiceFlow (DlServiceFlowUgs);
+
+
+
+  //задаем начальные позиции
+  bsNodes.Get(0)->GetObject<MobilityModel>()->SetPosition(Vector(0,0,0));
+  ssNodes.Get(0)->GetObject<MobilityModel>()->SetPosition(Vector(100,0,0));
+  
 
   //проверка начальной позиции мобильной станции
   Ptr<MobilityModel> mob = ssNodes.Get(0)->GetObject<MobilityModel>();
