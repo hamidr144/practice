@@ -231,8 +231,8 @@ ASN представляет собой множество базовых ста
 \newpage
 \section{Выполнение задания по теме}
 \subsection{ПО ns-3}
-ns-3 ~--- это дискретно-событийный симулятор сети, свободно распространяющийся
-под лицензией  GNU GPLv2 license. Основное использование ns-3 фокусируебться на
+ns-3\cite{ns3W:website} ~--- это дискретно-событийный симулятор сети, свободно
+распространяющийся под лицензией  GNU GPLv2 license. Основное использование ns-3 фокусируебться на
 беспровобном или IP моделирование, которое включаетодели для Wi-Fi, WiMAX и LTE.
 \subsubsection{Установка ns-3}
 Для установки потребовалось:
@@ -269,7 +269,7 @@ CXX=g++ ./waf configure
 \end{quote}
 \vspace{0.75cm}
 
-\subsection{Разбор первого примера}
+\subsection{Разбор первого примера\cite{ns3Doc:website}} 
 Для разработки модели в ns-3 используеться язык программирования С++.
 \begin{verbatim}
 #include "ns3/core-module.h"
@@ -426,7 +426,43 @@ TXtime: +5000000000.0ns RXtime: +5021237259.0ns Delay: +21237259.0ns
 
 
 \subsubsection{Вторая версия модели}
-Вторая версия модели представлена в файле wimaxv2.cc.
+Вторая версия модели представлена в файле wimaxv2.cc. Структура этой модели
+такая же, как и у первой версии, только для мобильной станции(абонента), была
+добавлена возможность передвижения, и были добавленны серверное и клиенское
+приложение.
+
+При помощи \textit{RandomRectanglePositionAllocator} и
+\textit{RandomWaypointMobilityModel} задаем область где должна двигаться
+мобильная база(абонент) и скорость.
+\textit{bsNodes.Get(0)->GetObject<MobilityModel>()->SetPosition(Vector(0,0,0));}
+и
+\textit{ssNodes.Get(0)->GetObject<MobilityModel>()->SetPosition(Vector(100,0,0));}
+задают начальные точки расположения  базовой и мобильной базы соответсвенно. Так
+же для првоерки двунаправленной передачи данных были добавлены
+\textit{UdpEchoServerHelper} и \textit{UdpEchoClientHelper}, работа которых была
+описана в в разборе первого примера.
+
+\vspace{1cm}
+Результаты выполнения программы:
+\begin{verbatim}
+POS: x=100, y=0
+At time 2s client sent 1024 bytes to 192.168.1.2 port 99
+At time 2.0179s server received 1024 bytes from 192.168.1.1 port 49153
+At time 2.0179s server sent 1024 bytes to 192.168.1.1 port 49153
+At time 2.02312s client received 1024 bytes from 192.168.1.2 port 99
+TraceDelay TX 1024 bytes to 192.168.1.2 Uid: 5867 Time: 3
+TraceDelay: RX 1012 bytes from 192.168.1.1 Sequence Number: 0 Uid: 5867 
+TXtime: +3000000000.0ns RXtime: +3018863773.0ns Delay: +18863773.0ns
+TraceDelay TX 1024 bytes to 192.168.1.2 Uid: 6863 Time: 3.5
+TraceDelay: RX 1012 bytes from 192.168.1.1 Sequence Number: 1 Uid: 6863 
+TXtime: +3500000000.0ns RXtime: +3514290866.0ns Delay: +14290866.0ns
+TraceDelay TX 1024 bytes to 192.168.1.2 Uid: 7845 Time: 4
+TraceDelay: RX 1012 bytes from 192.168.1.1 Sequence Number: 2 Uid: 7845 
+TXtime: +4000000000.0ns RXtime: +4019828717.0ns Delay: +19828717.0ns
+POS: x=399.7, y=0
+\end{verbatim}
+
+
 \newpage
 \addcontentsline{toc}{section}{Литература}
 \bibliography{biblio}
