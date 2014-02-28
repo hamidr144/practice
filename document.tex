@@ -462,7 +462,39 @@ TXtime: +4000000000.0ns RXtime: +4019828717.0ns Delay: +19828717.0ns
 POS: x=399.7, y=0
 \end{verbatim}
 
+\subsubsection{Третья версия модели}
+Третья версия модели представлена в файле wimaxv3.cc. В этой модели уже
+представлено большее количество узлов: узел мобильной станции, узел базовой
+станции, узел ASN и узел CSN (ssNode, bsNode, ASN\_Node, CSN\_Node
+соответсвенно).
 
+Маршрутизация производиться при помощи класса ns3::Ipv4StaticRoutingHelper.
+Адрессация происходит по адрессу группы 224.30.10.81. 
+
+\vspace{1cm}
+Результат выполнения программы:
+\begin{verbatim}
+TraceDelay TX 1024 bytes to 224.30.10.81 Uid: 5838 Time: 3
+TraceDelay: RX 1012 bytes from 192.168.1.2 Sequence Number: 0 Uid: 5838 
+TXtime: +3000000000.0ns RXtime: +3014298353.0ns Delay: +14298353.0ns
+TraceDelay TX 1024 bytes to 224.30.10.81 Uid: 6818 Time: 3.5
+TraceDelay: RX 1012 bytes from 192.168.1.2 Sequence Number: 1 Uid: 6818 
+TXtime: +3500000000.0ns RXtime: +3509725446.0ns Delay: +9725446.0ns
+TraceDelay TX 1024 bytes to 224.30.10.81 Uid: 7784 Time: 4
+TraceDelay: RX 1012 bytes from 192.168.1.2 Sequence Number: 2 Uid: 7784 
+TXtime: +4000000000.0ns RXtime: +4016596592.0ns Delay: +16596592.0ns
+TraceDelay TX 1024 bytes to 224.30.10.81 Uid: 9716 Time: 5
+TraceDelay: RX 1012 bytes from 192.168.3.2 Sequence Number: 0 Uid: 9716 
+TXtime: +5000000000.0ns RXtime: +5015880229.0ns Delay: +15880229.0ns
+TraceDelay TX 1024 bytes to 224.30.10.81 Uid: 10668 Time: 5.5
+TraceDelay: RX 1012 bytes from 192.168.3.2 Sequence Number: 1 Uid: 10668 
+TXtime: +5500000000.0ns RXtime: +5511418431.0ns Delay: +11418431.0ns
+TraceDelay TX 1024 bytes to 224.30.10.81 Uid: 11690 Time: 6
+TraceDelay: RX 1012 bytes from 192.168.3.2 Sequence Number: 2 Uid: 11690 
+TXtime: +6000000000.0ns RXtime: +6006845525.0ns Delay: +6845525.0ns
+POS: x=399.7, y=0
+
+\end{verbatim}
 \newpage
 \addcontentsline{toc}{section}{Литература}
 \bibliography{biblio}
