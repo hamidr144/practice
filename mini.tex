@@ -1,5 +1,6 @@
 \documentclass[14pt,a4paper]{article}
 %\renewcommand{\baselinestretch}{1.5}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
 \linespread{1.3}
 \usepackage[T2A]{fontenc} % Поддержка русских букв
 \usepackage[utf8]{inputenc} 
@@ -273,7 +274,6 @@ int main (int argc, char *argv[])
   ssNodes.Get(0)->GetObject<MobilityModel>()->SetPosition(Vector(100,0,0));
   
   Simulator::Stop (Seconds (duration));
-
   Simulator::Run ();
 
   Ptr<MobilityModel> mob = ssNodes.Get(0)->GetObject<MobilityModel>();
