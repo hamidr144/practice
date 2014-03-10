@@ -32,7 +32,7 @@ NS-3(https://www.nsnam.org/).
 
 \section{Код разработанной модели}
 
- {\scriptsize \begin{verbatim}
+ {\small \begin{verbatim}
 #include "ns3/core-module.h"
 #include "ns3/network-module.h"
 #include "ns3/applications-module.h"
@@ -77,12 +77,10 @@ int main (int argc, char *argv[])
 
   ssNodes.Create (1);
   bsNodes.Create (1);
-
   CSN_Node.Create (1);
   ASN_Node.Create (1);
 
   WimaxHelper wimax;
-
   channel = CreateObject<SimpleOfdmWimaxChannel> ();
   channel->SetPropagationModel (SimpleOfdmWimaxChannel::COST231_PROPAGATION);
   ssDevs = wimax.Install (ssNodes,
@@ -121,14 +119,12 @@ int main (int argc, char *argv[])
   NodeContainer LAN_ASN_BS;
 
   LAN_ASN_BS.Add (bsNodes.Get (0));
-
   LAN_ASN_BS.Add (ASN_Node.Get (0));
 
   csmaASN_BS.SetChannelAttribute ("DataRate", DataRateValue (DataRate (10000000)));
   csmaASN_BS.SetChannelAttribute ("Delay", TimeValue (MilliSeconds (2)));
 
   NetDeviceContainer LAN_ASN_BS_Devs = csmaASN_BS.Install (LAN_ASN_BS);
-
   NetDeviceContainer BS_CSMADevs;
 
   BS_CSMADevs.Add (LAN_ASN_BS_Devs.Get (0));
@@ -160,7 +156,6 @@ int main (int argc, char *argv[])
   stack.Install (ASN_Node);
 
   Ipv4AddressHelper address;
-
   address.SetBase ("192.168.1.0", "255.255.255.0");
   bsDevsOne.Add (bs);
   BSinterfaces = address.Assign (bsDevsOne);
@@ -169,13 +164,10 @@ int main (int argc, char *argv[])
   address.SetBase ("192.168.2.0", "255.255.255.0");
   Ipv4InterfaceContainer BSCSMAInterfaces = address.Assign (BS_CSMADevs);
   Ipv4InterfaceContainer ASNCSMAInterfaces1 = address.Assign (ASN_Devs1);
-
   address.SetBase ("192.168.3.0", "255.255.255.0");
   Ipv4InterfaceContainer ASNCSMAInterfaces2 = address.Assign (ASN_Devs2);
   Ipv4InterfaceContainer CSNCSMAInterfaces = address.Assign (CSN_Devs);
-
   Ipv4Address multicastGroup ("224.30.10.81");
-
   Ipv4StaticRoutingHelper multicast;
   
   Ptr<Node> multicastRouter = ASN_Node.Get (0); 
@@ -187,7 +179,6 @@ int main (int argc, char *argv[])
   Ptr<Node> sender = CSN_Node.Get (0);
   Ptr<NetDevice> senderIf = CSN_Devs.Get (0);
   multicast.SetDefaultMulticastRoute (sender, senderIf);
-
   multicastRouter = bsNodes.Get (0); 
   inputIf = BS_CSMADevs.Get (0); 
 
@@ -195,13 +186,10 @@ int main (int argc, char *argv[])
   inputIf, bsDevsOne);
 
   Ipv4StaticRoutingHelper multicast1;
-  
   Ptr<Node> multicastRouter1 = bsNodes.Get (0); 
   Ptr<NetDevice> inputIf1 = bsDevsOne.Get (0); 
-
   multicast1.AddMulticastRoute (multicastRouter1, SSinterfaces.GetAddress(0), multicastGroup, 
   inputIf1, BS_CSMADevs);
-
   Ptr<Node> sender1 = ssNodes.Get (0);
   Ptr<NetDevice> senderIf1 = ssDevs.Get (0);
   multicast1.SetDefaultMulticastRoute (sender1, senderIf1);
@@ -219,7 +207,6 @@ int main (int argc, char *argv[])
   ApplicationContainer clientApps;
 
   udpServer = UdpServerHelper (100);
-
   serverApps = udpServer.Install (CSN_Node.Get (0));
   serverApps.Start (Seconds (1));
   serverApps.Stop (Seconds (duration));
@@ -228,7 +215,6 @@ int main (int argc, char *argv[])
   udpClient.SetAttribute ("MaxPackets", UintegerValue (3));
   udpClient.SetAttribute ("Interval", TimeValue (Seconds (0.5)));
   udpClient.SetAttribute ("PacketSize", UintegerValue (1024));
-
   clientApps = udpClient.Install (ssNodes.Get (0));
   clientApps.Start (Seconds (3));
   clientApps.Stop (Seconds (duration));
@@ -239,7 +225,6 @@ int main (int argc, char *argv[])
   ApplicationContainer clientApps1;
 
   udpServer1 = UdpServerHelper (99);
-
   serverApps1 = udpServer1.Install (ssNodes.Get (0));
   serverApps1.Start (Seconds (1));
   serverApps1.Stop (Seconds (duration));
@@ -248,7 +233,6 @@ int main (int argc, char *argv[])
   udpClient1.SetAttribute ("MaxPackets", UintegerValue (3));
   udpClient1.SetAttribute ("Interval", TimeValue (Seconds (0.5)));
   udpClient1.SetAttribute ("PacketSize", UintegerValue (1024));
-
   clientApps1 = udpClient1.Install (CSN_Node.Get (0));
   clientApps1.Start (Seconds (5));
   clientApps1.Stop (Seconds (duration));
@@ -263,11 +247,9 @@ int main (int argc, char *argv[])
                                             100,
                                             17,
                                             1);
-
   ServiceFlow MulticastServiceFlow = wimax.CreateServiceFlow (ServiceFlow::SF_DIRECTION_DOWN,
                                                               ServiceFlow::SF_TYPE_UGS,
                                                               MulticastClassifier);
-
   ss->AddServiceFlow (MulticastServiceFlow);
 
   bsNodes.Get(0)->GetObject<MobilityModel>()->SetPosition(Vector(0,0,0));
